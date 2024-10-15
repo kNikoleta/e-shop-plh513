@@ -1,0 +1,113 @@
+body {
+  background-image: url('/assets/orders.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Prevents repeating */
+  height: 100vh; /* Ensures full viewport height */
+  background-color: #313131; /* Fallback color */
+  overflow: hidden; /* Prevents overflow on the body */
+
+}
+
+.cart-container {
+  width: 95%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;    
+  position: relative; /* Needed to position child elements */
+  overflow-y: auto; /* Allows vertical scrolling of cart items */
+  max-height: calc(100vh - 40px); /* Adjusts height minus margin/padding */
+  background-attachment: fixed; /* added for fixed background */
+}
+
+h1 {
+  max-width: 800px;
+  margin: 20px auto; /* center horizontally */
+  background-color: #131212be;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #dfc039;
+}
+
+.cart-item {
+  display: flex;
+  max-width: 800px;
+  margin: 20px auto; /* center horizontally */
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffffa8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controls input {
+  width: 50px;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.remove-button {
+  background-color: #313131e3;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.remove-button:hover {
+  background-color: #000000;
+}
+
+.total {
+  margin: 20px auto; /* center horizontally */
+  max-width: 800px;
+  text-align: right;
+  margin-top: 20px;
+}
+
+.total p {
+  background-color: #dfc552c0;
+  border-radius: 5px;  
+  padding: 7px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.total button {
+  background-color: #dfc552;
+  color: rgb(20, 20, 20);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.total button:hover {
+  background-color: #eed257;
+}
+
+.total button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}

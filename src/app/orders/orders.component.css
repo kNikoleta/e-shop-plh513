@@ -1,0 +1,71 @@
+.orders-container {
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  background-image: url('/assets/my_orders_back.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Ensures background does not repeat */
+  background-color: #c7c5c5d2; /* Fallback color */
+  background-attachment: fixed; /* Keeps background fixed */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the content horizontally */
+  overflow: hidden; /* Prevents scrolling of the entire container */
+}
+
+h2 {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #dfc039;
+  border-radius: 10px;
+  background-color: #1312128c;
+  padding-right: 30px; /* Optional: Adds space on the right side */
+}
+
+.order-card-wrapper {
+  width: 100%;
+  max-width: 800px;
+  overflow-y: auto; /* Allows scrolling of order cards */
+  flex: 1; /* Ensures the content can grow */
+  padding-right: 10px; /* Optional: Adds space on the right side */
+}
+
+.order-card {
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #eeecec77;
+}
+
+.order-card h4 {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 0 10px;
+}
+
+.product-list {
+  width: 100%;
+  max-width: 800px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 10px;
+}
+
+.product-list li {
+  width: 100%;
+  max-width: 800px;
+  margin: 5px 0;
+}
+
+.total-price {
+  font-weight: bold;
+  text-align: right;
+  color: #333;
+}

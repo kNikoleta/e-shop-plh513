@@ -1,0 +1,85 @@
+/* app.component.css or any other component CSS file */
+.container {
+  background-image: url('/assets/products_back.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Prevent the background from repeating */
+  height: 100vh;
+  background-color: #313131; /* Fallback color */
+  position: relative; /* Needed to position child elements */
+  overflow: hidden; /* Prevent overflow on the container */
+  background-attachment: fixed; /* added for fixed background */
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-height: calc(100vh - 250px); /* Adjust height if you have a title or search bar */
+  overflow-y: auto; /* Enable vertical scrolling for the product list */
+  padding: 20px; /* Padding to avoid items touching the edges */
+  position: relative; /* Needed for child positioning */
+  z-index: 1; /* Ensure the product list appears above the background */
+}
+
+.product-card {
+  background: #f8f8f8a9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(180, 180, 180, 0.1);
+  text-align: center;
+}
+
+.product-card img {
+  max-width: 150px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.product-card p {
+  color: #555;
+  font-size: 0.9em;
+  margin: 10px 0;
+}
+
+.title {
+  display: grid;
+  color: #f7e6dc;
+  place-items: center; /* Centers both horizontally and vertically */
+  text-align: center; /* Center text inside the container */
+}
+
+.search-bar {
+  display: grid;
+  place-items: center; /* Centers both horizontally and vertically */
+  text-align: center; /* Center text inside the container */
+  margin-bottom: 10px;
+}
+
+.price {
+  font-weight: bold;
+  margin: 10px 5px;
+  color: #000000;
+}
+
+button {
+  background-color: #dfc552;
+  color: #030303;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #eed35c;
+}
+
+button:active {
+  background-color: #dfc552;
+}

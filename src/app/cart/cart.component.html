@@ -1,0 +1,35 @@
+<div class="cart-container"style="background-image: url(
+  '/assets/orders.png'
+    ); background-size: cover; background-position: center; height: 100vh;">
+    <h1>Shopping Cart</h1>
+    
+    <div *ngIf="cartItems.length === 0">Your cart is empty.</div>
+    
+    <div class="cart-item" *ngFor="let item of cartItems">
+        <img [src]="item.image" alt="{{ item.name }}" class="product-image" />
+        <div class="item-details">
+          <h4>{{ item.name }}</h4>
+          <p>Description: {{ item.description}}</p>
+          <p>Price: {{ item.price}}  €</p>
+          <div class="quantity-controls">
+            <button (click)="updateQuantity(item, item.quantity - 1)">-</button>
+            <input 
+                type="number" 
+                [value]="item.quantity" 
+                (input)="onQuantityChange(item, $event)" 
+                min="1" 
+            />
+            <button (click)="updateQuantity(item, item.quantity + 1)">+</button>
+           </div>
+        <button (click)="removeItem(item)" class="remove-button">Remove</button>
+      </div>
+    </div>
+  
+    <div class="total">
+      <p>Total: {{ totalAmount}} €</p>
+      <button (click)="checkout()" [disabled]="cartItems.length === 0">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+  

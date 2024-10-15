@@ -1,0 +1,32 @@
+<div class = "container"  style="background-image: url(
+  '/assets/products_back.png'
+    ); background-size: cover; background-position: center; height: 100vh;">
+  <div class="title">
+    <h1>WELCOME</h1>
+    <p>Shop at NeΦκ!</p>
+
+  </div>
+
+  <div class = "search-bar">
+    <input 
+      type="text" 
+      placeholder="Search for a product..." 
+      [(ngModel)]="searchTerm"
+      (input)="filterProducts()"
+    />
+  </div>
+
+  <div class="product-list">
+    <div 
+      class="product-card" 
+      *ngFor="let product of filteredProducts">
+      <img [src]="product.image" alt="{{product.name}}" />
+      <h3>{{product.name}}</h3>
+      <p>{{product.description}}</p>
+      <p>Quantity: {{ product.quantity }}</p>
+      <span class="price">{{product.price }} €</span>
+      <button (click)="addToCart(product)">Add to Cart</button>
+    </div>
+  </div>
+
+</div>

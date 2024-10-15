@@ -1,0 +1,49 @@
+ 
+<div class="my-products-container">
+<div class="my-products">
+    <h2>My products</h2>
+  
+    <!-- Product Form -->
+    <form (ngSubmit)="onSubmit()" #productsForm="ngForm">
+      <div>
+        <label for="title">Product Title:</label>
+        <input type="text" id="title" name="title" required placeholder="Insert title" />
+      </div>
+      
+      <div>
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" name="image" required placeholder="Insert image URL" />
+      </div>
+      
+      <div>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required placeholder="Insert price" />
+      </div>
+      
+      <div>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required placeholder="Insert quantity" />
+      </div>
+  
+      <button type="submit">{{ product.id ? 'Update Product' : 'Add Product' }}</button>
+      <button type="button" (click)="resetForm()" *ngIf="product.id">Cancel</button>
+    </form>
+  
+    <h2>Product List</h2>
+    <div class="product-list" *ngIf="products.length > 0; else noProducts">
+      <div class="product-card" *ngFor="let item of products">
+        <img [src]="item.image" alt="{{ item.title }}" />
+        <h4>{{ item.title }}</h4>
+        <p>Price: {{ item.price }} €</p>
+        <p>Quantity {{ item.quantity }}</p>
+        <button (click)="editProduct(item)">Edit</button>
+        <button (click)="deleteProduct(item)">Delete</button>
+      </div>
+    </div>
+  
+    <!-- Message when there are no products -->
+    <ng-template #noProducts>
+      <p>No available products.</p>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li>
+                <a routerLink="/dashboard" routerLinkActive="active" [ngClass]="{ 'active': activeLink === '/dashboard' }" (click)="setActive('/dashboard')">
+                    <i class="fi fi-tr-home"></i> Home
+                </a>
+            </li>
+            <li>
+                <a routerLink="/products" routerLinkActive="active" [ngClass]="{ 'active': activeLink === '/products' }" (click)="setActive('/products')">
+                    <i class="fi fi-tr-cart-shopping-fast"></i> Products
+                </a>
+            </li>
+            <li>
+                <a routerLink="/my-products" routerLinkActive="active" [ngClass]="{ 'active': activeLink === '/my-products' }" (click)="setActive('/my-products')">
+                    <i class="fi fi-tr-my-products-icon"></i> My Products
+                </a>
+            </li>
+            <li>
+                <a routerLink="/orders" routerLinkActive="active" [ngClass]="{ 'active': activeLink === '/orders' }" (click)="setActive('/orders')">
+                    <i class="fi fi-tr-orders-icon"></i> Orders
+                </a>
+            </li>
+            <li>
+                <a routerLink="/cart" routerLinkActive="active" [ngClass]="{ 'active': activeLink === '/cart' }" (click)="setActive('/cart')">
+                    <i class="fi fi-tr-cart-icon"></i> Cart
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
