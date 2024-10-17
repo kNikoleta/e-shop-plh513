@@ -6,9 +6,9 @@
     <div *ngIf="cartItems.length === 0">Your cart is empty.</div>
     
     <div class="cart-item" *ngFor="let item of cartItems">
-        <img [src]="item.image" alt="{{ item.name }}" class="product-image" />
+        <img [src]="item.img" alt="{{ item.title }}" class="product-image" />
         <div class="item-details">
-          <h4>{{ item.name }}</h4>
+          <h4>{{ item.title }}</h4>
           <p>Description: {{ item.description}}</p>
           <p>Price: {{ item.price}}  €</p>
           <div class="quantity-controls">

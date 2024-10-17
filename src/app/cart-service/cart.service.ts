@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 
 interface CartItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   description: string;
   quantity: number;
-  image: string;
+  img: string;
 }
 
 @Injectable({

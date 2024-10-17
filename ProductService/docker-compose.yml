@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: products_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      - my_network
+
+  product-service:
+    build: ./ProductService
+    ports:
+      - "3003:3003"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: localhost
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: products_db
+    networks:
+      - my_network
+    
+  order-service:
+    build: 
+      context: ./OrderService
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=root_password
+      - DB_NAME=orders_db
+    depends_on:
+      - mysql
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge

@@ -4,11 +4,11 @@ import { CartService } from '../cart-service/cart.service';
 
 interface CartItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   description: string;
   quantity: number;
-  image: string;
+  img: string;
 }
 
 @Component({

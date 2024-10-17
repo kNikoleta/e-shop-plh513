@@ -1,6 +1,5 @@
-.my-products-container{
-  height: 100vh;
-
+.my-products-container {
+  height: 100vh; /* You can keep this to ensure the full viewport height */
   background-image: url('/assets/myprod_back.png');
   background-size: cover;
   background-position: center;
@@ -8,7 +7,7 @@
   background-color: #313131; /* Fallback color */
   position: relative; /* Needed to position child elements */
   overflow: hidden; /* Prevent overflow on the container */
-  background-attachment: fixed; /* added for fixed background */
+  background-attachment: fixed; /* Keep background fixed */
 }
 
 .my-products {
@@ -25,22 +24,18 @@
   flex-direction: column;
   align-items: center; /* Centers child elements horizontally */
   justify-content: flex-start; /* Aligns child elements at the top */
-
 }
 
-
-.my-products h2, .my-products h3 {
-  background: #f7da5a69;
-  text-align: center;
-  width: 100%;
-}
-
+/* New styles for the scrollable product list */
 .product-list {
   width: 100%;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center; /* Centers product cards horizontally */
+  
+  max-height: 60vh; /* Set a fixed height for the product list */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .product-card {
