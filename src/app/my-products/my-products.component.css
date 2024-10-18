@@ -6,8 +6,9 @@
   background-repeat: no-repeat; /* Prevent the background from repeating */
   background-color: #313131; /* Fallback color */
   position: relative; /* Needed to position child elements */
-  overflow: hidden; /* Prevent overflow on the container */
-  background-attachment: fixed; /* Keep background fixed */
+  overflow-y: auto; /* Allows vertical scrolling of cart items */
+  max-height: calc(100vh - 40px); /* Adjusts height minus margin/padding */
+  background-attachment: fixed; /* added for fixed background */
 }
 
 .my-products {
@@ -39,7 +40,7 @@
 }
 
 .product-card {
-  background: #cac8c73b;
+  background: #cac8c700;
   border-radius: 20px;
   padding: 10px;
   margin-bottom: 10px;

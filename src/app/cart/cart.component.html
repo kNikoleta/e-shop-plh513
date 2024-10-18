@@ -9,7 +9,6 @@
         <img [src]="item.img" alt="{{ item.title }}" class="product-image" />
         <div class="item-details">
           <h4>{{ item.title }}</h4>
-          <p>Description: {{ item.description}}</p>
           <p>Price: {{ item.price}}  €</p>
           <div class="quantity-controls">
             <button (click)="updateQuantity(item, item.quantity - 1)">-</button>

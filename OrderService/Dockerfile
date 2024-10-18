@@ -1,8 +1,11 @@
 # Use the official Node.js image as a base image
-FROM node:16
+FROM node:18
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /app/OrderService
+
+# Install MySQL client
+RUN apt-get update && apt-get install -y default-mysql-client
 
 # Copy package.json and package-lock.json files to the working directory
 COPY package*.json ./

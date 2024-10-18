@@ -28,7 +28,7 @@ pool.getConnection()
 // CRUD operations
 
 // 1. Get all products
-app.get('/api/products', async (req, res) => {
+app.get('/products', async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM products');
         res.json(rows);
@@ -40,7 +40,7 @@ app.get('/api/products', async (req, res) => {
 
 // 2. Get a single product by ID
 // Get a product by ID or title
-app.get('/api/products/:identifier', async (req, res) => {
+app.get('/products/:identifier', async (req, res) => {
   let { identifier } = req.params;
 
   // Trim whitespace
@@ -75,7 +75,7 @@ app.get('/api/products/:identifier', async (req, res) => {
   }
 });
 // 3. Create a new product
-app.post('/api/products', async (req, res) => {
+app.post('/products', async (req, res) => {
   const { title, img, price, quantity } = req.body;
   try {
       const [result] = await pool.query('INSERT INTO products (title, img, price, quantity) VALUES (?, ?, ?, ?)', [title, img, price, quantity]);
@@ -88,7 +88,7 @@ app.post('/api/products', async (req, res) => {
 
 
 // 4. Update a product by ID
-app.put('/api/products/:id', async (req, res) => {
+app.put('/products/:id', async (req, res) => {
     const { id } = req.params;
     const { title, img, price, quantity } = req.body;
     try {
@@ -104,7 +104,7 @@ app.put('/api/products/:id', async (req, res) => {
 });
 
 // 5. Delete a product by ID
-app.delete('/api/products/:id', async (req, res) => {
+app.delete('/products/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const [result] = await pool.query('DELETE FROM products WHERE id = ?', [id]);

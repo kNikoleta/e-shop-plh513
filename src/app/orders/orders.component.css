@@ -14,6 +14,10 @@
   flex-direction: column;
   align-items: center; /* Centers the content horizontally */
   overflow: hidden; /* Prevents scrolling of the entire container */
+  position: relative; /* Needed to position child elements */
+  overflow-y: auto; /* Allows vertical scrolling of cart items */
+  max-height: calc(100vh - 40px); /* Adjusts height minus margin/padding */
+  background-attachment: fixed; /* added for fixed background */
 }
 
 h2 {
@@ -25,6 +29,7 @@ h2 {
   border-radius: 10px;
   background-color: #1312128c;
   padding-right: 30px; /* Optional: Adds space on the right side */
+  
 }
 
 .order-card-wrapper {
@@ -33,6 +38,7 @@ h2 {
   overflow-y: auto; /* Allows scrolling of order cards */
   flex: 1; /* Ensures the content can grow */
   padding-right: 10px; /* Optional: Adds space on the right side */
+  
 }
 
 .order-card {
@@ -42,6 +48,7 @@ h2 {
   margin-bottom: 20px;
   border-radius: 10px;
   background-color: #eeecec77;
+ 
 }
 
 .order-card h4 {

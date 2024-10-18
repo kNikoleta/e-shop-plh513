@@ -1,39 +1,55 @@
-// routes/orders.js
-
 const express = require('express');
 const router = express.Router();
-const Order = require('../Models/order');
+const pool = require('../config/database');
 
 // Create a new order
 router.post('/', async (req, res) => {
-    try {
-        const newOrder = await Order.create(req.body); // Create new order
-        res.status(201).json(newOrder);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+  try {
+    const { products, total_price } = req.body;
+    const status = 'Pending';
+    
+    // Insert a new order into the orders table
+    const [result] = await pool.query(
+      'INSERT INTO orders (total_price, status) VALUES (?, ?)',
+      [total_price, status]
+    );
+    const orderId = result.insertId;
+
+    // Insert order items into order_items table
+    for (const product of products) {
+      await pool.query(
+        'INSERT INTO order_items (order_id, product_id, title, amount, price) VALUES (?, ?, ?, ?, ?)',
+        [orderId, product.product_id, product.title, product.amount, product.price]
+      );
     }
+    
+    res.status(201).json({ message: 'Order created', orderId });
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating order', error });
+  }
 });
 
-// Get all orders
+// Get all orders including their items
 router.get('/', async (req, res) => {
-    try {
-        const orders = await Order.findAll(); // Fetch all orders
-        res.status(200).json(orders);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+  try {
+    const [orders] = await pool.query('SELECT * FROM orders');
+    
+    // Fetch order items for each order
+    const [orderItems] = await pool.query('SELECT * FROM order_items');
+    
+    // Map the order items to their respective orders
+    const ordersWithItems = orders.map(order => {
+      const items = orderItems.filter(item => item.order_id === order.id);
+      return {
+        ...order,
+        products: items
+      };
+    });
 
-// Get orders by username (you may need to modify your Order model to relate it to users)
-router.get('/:username', async (req, res) => {
-    const { username } = req.params;
-    try {
-        // Assuming a User model exists and the order has a user_id reference
-        const orders = await Order.findAll({ where: { user_id: username } });
-        res.status(200).json(orders);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    res.status(200).json(ordersWithItems);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching orders', error });
+  }
 });
 
 module.exports = router;

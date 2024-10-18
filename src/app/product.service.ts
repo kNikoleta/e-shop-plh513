@@ -17,7 +17,7 @@ interface Product {
   providedIn: 'root', // This makes the service available throughout the app
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3001/api/products'; // Update this URL to match your backend API
+  private apiUrl = 'http://localhost:3001/products'; // Update this URL to match your backend API
 
   constructor(private http: HttpClient) {}
 

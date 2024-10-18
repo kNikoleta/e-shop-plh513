@@ -1,14 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../cart-service/cart.service';
+import { OrderService } from '../order.service'; // Import the OrderService
+import { Router } from '@angular/router'; // Import Router for navigation
 
 interface CartItem {
   id: number;
   title: string;
   price: number;
-  description: string;
   quantity: number;
   img: string;
+}
+
+interface Order {
+  id: number;
+  total_price: number;
+  stat: string;
+  date: string;
+  products: { title: string; amount: number; product_id: number; price:number }[];
 }
 
 @Component({
@@ -22,7 +31,11 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalAmount: number = 0;
 
-  constructor(private cartService: CartService) {} // Inject the CartService
+  constructor(
+    private cartService: CartService,
+    private orderService: OrderService, // Inject the OrderService
+    private router: Router // Inject Router for navigation
+  ) {}
 
   ngOnInit() {
     this.loadCart();
@@ -30,36 +43,61 @@ export class CartComponent implements OnInit {
   }
 
   loadCart() {
-    this.cartItems = this.cartService.getCartItems(); // Load items from the CartService
+    this.cartItems = this.cartService.getCartItems();
   }
 
   calculateTotal() {
-    this.totalAmount = this.cartService.calculateTotal(); // Calculate total from CartService
+    this.totalAmount = this.cartService.calculateTotal();
   }
 
   removeItem(item: CartItem) {
     this.cartService.removeItem(item);
-    this.loadCart(); // Refresh cart items
-    this.calculateTotal(); // Recalculate total
+    this.loadCart();
+    this.calculateTotal();
   }
 
   updateQuantity(item: CartItem, quantity: number) {
     this.cartService.updateQuantity(item, quantity);
-    this.loadCart(); // Refresh cart items
-    this.calculateTotal(); // Recalculate total
+    this.loadCart();
+    this.calculateTotal();
   }
 
   onQuantityChange(item: CartItem, event: Event) {
-    const quantity = (event.target as HTMLInputElement).valueAsNumber; // Cast event target to HTMLInputElement
+    const quantity = (event.target as HTMLInputElement).valueAsNumber;
     this.updateQuantity(item, quantity);
   }
 
   checkout() {
-    // Handle checkout logic, e.g., send cart data to Order Service
-    console.log('Proceeding with checkout', this.cartItems);
-    localStorage.removeItem('cart');
-    this.cartItems = [];
-    this.totalAmount = 0;
-    alert('Order placed successfully!');
+    const products = this.cartItems.map(item => ({
+      title: item.title,
+      amount: item.quantity,
+      price: item.price,
+      product_id: item.id // Ensure this matches your backend expectations
+    }));
+  
+    const order: Order = {
+      id: 0, // This will typically be set by the backend, you can use 0 or -1 temporarily
+      date: new Date().toISOString().split('T')[0], // Current date in 'YYYY-MM-DD' format
+      stat: "Success",
+      products,
+      total_price: this.totalAmount
+    };
+  
+    this.orderService.placeOrder(order).subscribe({
+      next: response => {
+        console.log('Order placed successfully', response);
+        localStorage.removeItem('cart');
+        this.cartItems = [];
+        this.totalAmount = 0;
+        alert('Order placed successfully!');
+        this.router.navigate(['/']); // Navigate to the homepage or another page
+      },
+      error: error => {
+        console.error('Error placing order', error);
+        alert('Failed to place order. Please try again.');
+      }
+    });
   }
+  
+  
 }

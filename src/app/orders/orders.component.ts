@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OrderService } from '../order.service'; // Import the OrderService
+import { Router } from '@angular/router'; // Import Router for navigation
 
 interface Order {
   id: number;
+  total_price: number;
+  stat: string;
   date: string;
-  products: { name: string; quantity: number; price: number }[];
-  totalPrice: number;
+  products: { title: string; amount: number; product_id: number; price:number }[];
 }
 
 @Component({
@@ -15,25 +18,30 @@ interface Order {
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent {
-  orders: Order[] = [
-    {
-      id: 1,
-      date: '2024-10-01',
-      products: [
-        { name: 'Product 1', quantity: 2, price: 19.99 },
-        { name: 'Product 2', quantity: 1, price: 29.99 }
-      ],
-      totalPrice: 69.97 // 2 * 19.99 + 29.99
-    },
-    {
-      id: 2,
-      date: '2024-10-02',
-      products: [
-        { name: 'Product 3', quantity: 3, price: 39.99 },
-        { name: 'Product 4', quantity: 2, price: 49.99 }
-      ],
-      totalPrice: 219.95 // 3 * 39.99 + 2 * 49.99
-    }
-  ];
+export class OrdersComponent implements OnInit {
+  orders: Order[] = []; // Initialize an empty orders array
+  constructor(private orderService: OrderService) {} // Inject the OrderService
+
+  ngOnInit() {
+    this.fetchOrders(); // Fetch orders on component initialization
+  }
+
+  fetchOrders() {
+    this.orderService.getOrders().subscribe({
+      next: (fetched_orders: Order[]) => {
+        this.orders = fetched_orders;
+        console.log('Fetched orders:', fetched_orders); // Log orders to inspect data
+       // this.orders = orders.map((order) => ({
+       //   ...order,
+        //  date: order.date || new Date().toISOString().slice(0, 10) // Use order date if available
+        //}));
+      },
+      error: (error) => {
+        console.error('Error fetching orders', error);
+      }
+    });
+  }
+  
 }
+
+ 

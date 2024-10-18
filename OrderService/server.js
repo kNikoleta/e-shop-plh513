@@ -1,24 +1,27 @@
-// server.js
-
+require('dotenv').config();
 const express = require('express');
+const cors = require('cors'); // Import cors
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const orderRoutes = require('./routes/orders');
-const sequelize = require('./config/database');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:4200', // Your Angular app URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed methods
+  credentials: true, // Enable credentials if needed
+}));
+
+
+app.use(express.json()); // For parsing application/json
+
+
+
 app.use(bodyParser.json());
+app.use('/orders', orderRoutes);
 
-// Routes
-app.use('/api/orders', orderRoutes);
 
-// Start the server and sync the database
-sequelize.sync().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}).catch(err => console.error('Error syncing the database:', err));
+const PORT = process.env.PORT || 3004;
+app.listen(PORT, () => {
+  console.log(`Order service running on port ${PORT}`);
+});
