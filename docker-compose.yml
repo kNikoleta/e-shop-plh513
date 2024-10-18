@@ -1,6 +1,7 @@
 version: '3.8'
 services:
-  mysql:
+  # MySQL service for products
+  mysql-products:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -8,9 +9,25 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: root
     ports:
-      - "3306:3306"
+      - "3306:3306"         # Make sure to change this if needed to avoid conflict
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql_products_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - my_network
+
+  # MySQL service for orders
+  mysql-orders:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: orders_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+    ports:
+      - "3307:3306"         # Change the host port to avoid conflict with the first MySQL container
+    volumes:
+      - mysql_orders_data:/var/lib/mysql
       - ./mysql-init:/docker-entrypoint-initdb.d
     networks:
       - my_network
@@ -20,10 +37,10 @@ services:
     ports:
       - "3003:3003"
     depends_on:
-      - mysql
+      - mysql-products
     environment:
-      DB_HOST: mysql
-      DB_USER: root
+      DB_HOST: mysql-products
+      DB_USER: user
       DB_PASSWORD: root
       DB_NAME: products_db
     networks:
@@ -32,12 +49,12 @@ services:
   order-service:
     build: ./OrderService
     ports:
-      - "3004:3004"
+      - "3002:3002"
     depends_on:
-      - mysql
+      - mysql-orders
     environment:
-      DB_HOST: mysql
-      DB_USER: root
+      DB_HOST: mysql-orders  # Make sure this matches the service name of your MySQL container
+      DB_USER: user
       DB_PASSWORD: root
       DB_NAME: orders_db
     networks:
@@ -48,4 +65,5 @@ networks:
     driver: bridge
 
 volumes:
-  mysql_data:
+  mysql_products_data:
+  mysql_orders_data:

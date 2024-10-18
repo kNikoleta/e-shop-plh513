@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const orderRoutes = require('./routes/orders');
 
 const app = express();
+const pool = require('./config/database');
 
 app.use(cors({
   origin: 'http://localhost:4200', // Your Angular app URL
@@ -19,6 +20,7 @@ app.use(express.json()); // For parsing application/json
 
 app.use(bodyParser.json());
 app.use('/orders', orderRoutes);
+
 
 
 const PORT = process.env.PORT || 3004;

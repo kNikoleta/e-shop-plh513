@@ -8,7 +8,7 @@ interface Order {
   total_price: number;
   stat: string;
   date: string;
-  products: { title: string; amount: number; product_id: number; price:number }[];
+  products: { title: string; amount: number; price:number }[];
 }
 
 @Injectable({

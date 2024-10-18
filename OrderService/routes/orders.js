@@ -18,8 +18,8 @@ router.post('/', async (req, res) => {
     // Insert order items into order_items table
     for (const product of products) {
       await pool.query(
-        'INSERT INTO order_items (order_id, product_id, title, amount, price) VALUES (?, ?, ?, ?, ?)',
-        [orderId, product.product_id, product.title, product.amount, product.price]
+        'INSERT INTO order_items (order_id, title, amount, price) VALUES (?, ?, ?, ?)',
+        [orderId, product.title, product.amount, product.price]
       );
     }
     

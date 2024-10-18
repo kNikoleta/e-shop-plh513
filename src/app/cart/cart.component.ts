@@ -17,7 +17,7 @@ interface Order {
   total_price: number;
   stat: string;
   date: string;
-  products: { title: string; amount: number; product_id: number; price:number }[];
+  products: { title: string; amount: number; price:number }[];
 }
 
 @Component({
@@ -71,8 +71,8 @@ export class CartComponent implements OnInit {
     const products = this.cartItems.map(item => ({
       title: item.title,
       amount: item.quantity,
-      price: item.price,
-      product_id: item.id // Ensure this matches your backend expectations
+      price: item.price
+     // product_id: item.id // Ensure this matches your backend expectations
     }));
   
     const order: Order = {
