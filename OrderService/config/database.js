@@ -2,15 +2,16 @@
 require('dotenv').config();
 const mysql = require('mysql2');
 
-// Create a connection pool
-const pool = mysql.createConnection({
-    host: process.env.DB_HOST || 'mysql-orders',  // This should be 'mysql-orders' to match the Docker service name
-    user: process.env.DB_USER || 'user',
-    password: process.env.DB_PASSWORD || 'root',
-    database: process.env.DB_NAME || 'orders_db',
-    port: 3307 // MySQL default port inside the container
-  });
 
+const pool = mysql.createConnection({
+    host: process.env.DB_HOST,  // This should resolve to mysql-products
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: 3306
+});
+
+  
 pool.connect((err) => {
     if (err) {
         console.error('Error connecting to the database:', err);

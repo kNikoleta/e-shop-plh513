@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  # MySQL service for products
+    # MySQL service for products
   mysql-products:
     image: mysql:latest
     environment:
@@ -9,12 +9,16 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: root
     ports:
-      - "3306:3306"         # Make sure to change this if needed to avoid conflict
+      - "3306:3306"
     volumes:
       - mysql_products_data:/var/lib/mysql
-      - ./mysql-init:/docker-entrypoint-initdb.d
     networks:
       - my_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # MySQL service for orders
   mysql-orders:
@@ -25,22 +29,29 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: root
     ports:
-      - "3307:3306"         # Change the host port to avoid conflict with the first MySQL container
+      - "3307:3306"
     volumes:
       - mysql_orders_data:/var/lib/mysql
-      - ./mysql-init:/docker-entrypoint-initdb.d
     networks:
       - my_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   product-service:
     build: ./ProductService
     ports:
-      - "3003:3003"
+      - "3001:3001"
     depends_on:
-      - mysql-products
+      mysql-orders:
+        condition: service_healthy
+      mysql-products:
+        condition: service_healthy
     environment:
       DB_HOST: mysql-products
-      DB_USER: user
+      DB_USER: root
       DB_PASSWORD: root
       DB_NAME: products_db
     networks:
@@ -49,21 +60,26 @@ services:
   order-service:
     build: ./OrderService
     ports:
-      - "3002:3002"
+      - "3004:3004"
     depends_on:
-      - mysql-orders
+      mysql-orders:
+        condition: service_healthy
+      mysql-products:
+        condition: service_healthy
     environment:
-      DB_HOST: mysql-orders  # Make sure this matches the service name of your MySQL container
+      DB_HOST: mysql-orders
       DB_USER: user
       DB_PASSWORD: root
       DB_NAME: orders_db
     networks:
       - my_network
 
+  
+
 networks:
   my_network:
-    driver: bridge
-
+   driver: bridge 
+    
 volumes:
   mysql_products_data:
   mysql_orders_data:

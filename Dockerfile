@@ -1,20 +1,12 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18 AS build
-
-# Set the working directory
-WORKDIR /e-shop-plh513
-
-# Copy the rest of your application code
+# Stage 1: Build the Angular application
+FROM node:18-alpine AS node
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
 COPY . .
+RUN npm run build 
 
-# Install dependencies
-RUN npm install -g @angular /cli
-
-RUN yarn install
-
-# Build the Angular application
-RUN npm run build --prod
-
-
-# Command to run Nginx
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+# Stage 2: Serve the application using NGINX
+FROM nginx:alpine
+COPY --from=node /app/dist/e-shop-plh513 /usr/share/nginx/html
+EXPOSE 80
