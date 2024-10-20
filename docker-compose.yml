@@ -74,7 +74,13 @@ services:
     networks:
       - my_network
 
-  
+   # Angular app service
+  my-app:
+    build: .
+    ports:
+      - "4200:80"
+    networks:
+      - my_network
 
 networks:
   my_network:
