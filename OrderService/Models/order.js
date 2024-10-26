@@ -1,16 +1,13 @@
-// models/Order.js
-
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // We'll create this file next
+const sequelize = require('../config/database'); 
 
 const Order = sequelize.define('Order', {
-    // Define the model attributes
     products: {
-        type: DataTypes.JSON, // Store products as a JSON object
+        type: DataTypes.JSON, 
         allowNull: false
     },
     total_price: {
-        type: DataTypes.FLOAT, // Store total price
+        type: DataTypes.FLOAT, 
         allowNull: false
     },
     status: {
@@ -18,9 +15,8 @@ const Order = sequelize.define('Order', {
         defaultValue: 'Pending'
     }
 }, {
-    timestamps: true // Automatically create createdAt and updatedAt fields
+    timestamps: true 
 });
 
-// Synchronize model with the database
 Order.sync();
 module.exports = Order;
