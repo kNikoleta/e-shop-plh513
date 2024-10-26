@@ -1,5 +1,4 @@
 Nikoleta Kopasi
-2020030015
 
 This is a web application built using the Angular framework for the frontend and MySQL for the backend database. The application includes basic functionalities. LocalStorage is used to persist cart data even after a page refresh. There is no login service implemented, the core functionalities of the application are operational, as described below.
 
