@@ -2,10 +2,10 @@ body {
   background-image: url('/assets/orders.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; /* Prevents repeating */
-  height: 100vh; /* Ensures full viewport height */
-  background-color: #313131; /* Fallback color */
-  overflow: hidden; /* Prevents overflow on the body */
+  background-repeat: no-repeat; 
+  height: 100vh; 
+  background-color: #313131; 
+  overflow: hidden; 
 
 }
 
@@ -14,15 +14,15 @@ body {
   margin: auto;
   padding: 20px;
   border-radius: 10px;    
-  position: relative; /* Needed to position child elements */
-  overflow-y: auto; /* Allows vertical scrolling of cart items */
-  max-height: calc(100vh - 40px); /* Adjusts height minus margin/padding */
-  background-attachment: fixed; /* added for fixed background */
+  position: relative; 
+  overflow-y: auto; 
+  max-height: calc(100vh - 40px);
+  background-attachment: fixed; 
 }
 
 h1 {
   max-width: 800px;
-  margin: 20px auto; /* center horizontally */
+  margin: 20px auto; 
   background-color: #131212be;
   text-align: center;
   border-radius: 10px;
@@ -33,7 +33,7 @@ h1 {
 .cart-item {
   display: flex;
   max-width: 800px;
-  margin: 20px auto; /* center horizontally */
+  margin: 20px auto; 
   align-items: center;
   margin-bottom: 20px;
   padding: 10px;
@@ -80,7 +80,7 @@ h1 {
 }
 
 .total {
-  margin: 20px auto; /* center horizontally */
+  margin: 20px auto; 
   max-width: 800px;
   text-align: right;
   margin-top: 20px;

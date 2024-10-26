@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../cart-service/cart.service';
 import { OrderService } from '../order.service'; // Import the OrderService
 import { Router } from '@angular/router'; // Import Router for navigation
+import {ProductService} from '../product.service';
 
 interface CartItem {
   id: number;
@@ -34,7 +35,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private orderService: OrderService, // Inject the OrderService
-    private router: Router // Inject Router for navigation
+    private router: Router, // Inject Router for navigation
+    private prdct: ProductService
   ) {}
 
   ngOnInit() {
@@ -72,32 +74,47 @@ export class CartComponent implements OnInit {
       title: item.title,
       amount: item.quantity,
       price: item.price
-     // product_id: item.id // Ensure this matches your backend expectations
     }));
   
     const order: Order = {
-      id: 0, // This will typically be set by the backend, you can use 0 or -1 temporarily
-      date: new Date().toISOString().split('T')[0], // Current date in 'YYYY-MM-DD' format
+      id: 0, 
+      date: new Date().toISOString().split('T')[0], 
       stat: "Success",
       products,
       total_price: this.totalAmount
     };
   
-    this.orderService.placeOrder(order).subscribe({
-      next: response => {
-        console.log('Order placed successfully', response);
-        localStorage.removeItem('cart');
-        this.cartItems = [];
-        this.totalAmount = 0;
-        alert('Order placed successfully!');
-        this.router.navigate(['/']); // Navigate to the homepage or another page
-      },
-      error: error => {
-        console.error('Error placing order', error);
-        alert('Failed to place order. Please try again.');
-      }
+    // First, update the product quantities in the database
+    const updateStockPromises = this.cartItems.map(item => {
+      return this.prdct.getProductById(item.id).toPromise().then((product) => {
+        product.quantity -= item.quantity; // Subtract the purchased quantity
+        return this.prdct.updateProduct(product).toPromise(); // Update the product in the database
+      });
+    });
+  
+    // Once all stock updates are done, place the order
+    Promise.all(updateStockPromises).then(() => {
+      // Place the order after stock updates
+      this.orderService.placeOrder(order).subscribe({
+        next: response => {
+          console.log('Order placed successfully', response);
+          localStorage.removeItem('cart');
+          this.cartItems = [];
+          this.totalAmount = 0;
+          alert('Order placed successfully!');
+          this.router.navigate(['/']); 
+        },
+        error: error => {
+          console.error('Error placing order', error);
+          alert('Failed to place order. Please try again.');
+        }
+      });
+    }).catch(error => {
+      console.error('Error updating stock', error);
+      alert('Failed to update product stock. Please try again.');
     });
   }
+  
   
   
 }

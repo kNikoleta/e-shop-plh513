@@ -9,7 +9,7 @@ interface CartItem {
 }
 
 @Injectable({
-  providedIn: 'root', // Make this service available app-wide
+  providedIn: 'root', 
 })
 export class CartService {
   private cartItems: CartItem[] = [];
@@ -19,7 +19,7 @@ export class CartService {
   }
 
   loadCart() {
-    const storedCart = localStorage.getItem('cart') ?? '[]'; // Default to an empty array if null
+    const storedCart = localStorage.getItem('cart') ?? '[]'; 
     this.cartItems = JSON.parse(storedCart);
   }
 
@@ -34,11 +34,11 @@ export class CartService {
   addToCart(item: CartItem) {
     const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
     if (existingItem) {
-      existingItem.quantity += 1; // Increase quantity if already in cart
+      existingItem.quantity += 1; 
     } else {
-      this.cartItems.push({ ...item, quantity: 1 }); // Add new item
+      this.cartItems.push({ ...item, quantity: 1 }); 
     }
-    this.saveCart(); // Save changes
+    this.saveCart(); 
   }
 
   removeItem(item: CartItem) {
@@ -50,9 +50,9 @@ export class CartService {
     const cartItem = this.cartItems.find(cartItem => cartItem.id === item.id);
     if (cartItem) {
       if (quantity <= 0) {
-        this.removeItem(cartItem); // Remove if quantity is less than or equal to 0
+        this.removeItem(cartItem); 
       } else {
-        cartItem.quantity = quantity; // Update quantity
+        cartItem.quantity = quantity; 
         this.saveCart();
       }
     }

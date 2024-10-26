@@ -5,9 +5,8 @@
     background-repeat: repeat;
     height: 100vh;
     width: 100%;
-    background-color: #313131; /* Fallback color */
+    background-color: #313131; 
     color: #ffffff;
-    background-attachment: fixed; /* added for fixed background */
-
+    background-attachment: fixed;  
 }
   

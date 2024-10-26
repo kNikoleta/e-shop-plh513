@@ -7,8 +7,8 @@ import { provideHttpClient } from '@angular/common/http';
 const updatedAppConfig = {
   ...appConfig,
   providers: [
-    ...(appConfig.providers || []), // Include existing providers if any
-    provideHttpClient() // Add provideHttpClient to the providers
+    ...(appConfig.providers || []), 
+    provideHttpClient() 
   ]
 };
 

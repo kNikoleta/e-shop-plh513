@@ -10,7 +10,7 @@ const routes: Routes = [
     { path: 'my-products', component: MyProductsComponent },
     { path: 'orders', component: OrdersComponent },
     { path: 'cart', component: CartComponent },
-    { path: '', redirectTo: '/products', pathMatch: 'full' } // Redirect to 'products' by default
+    { path: '', redirectTo: '/products', pathMatch: 'full' } 
 ];
 
 @NgModule({

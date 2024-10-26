@@ -28,11 +28,10 @@ export class MyProductsComponent {
     this.fetchProducts();
   }
 
-  // Fetch products from the service
   fetchProducts() {
     this.productService.getProducts().subscribe(
       (data: Product[]) => {
-        this.products = data; // Populate products with fetched data
+        this.products = data; 
       },
       error => {
         console.error('Error fetching products', error);
@@ -40,42 +39,38 @@ export class MyProductsComponent {
     );
   }
 
-  // Handle form submission to add or update product
   onSubmit() {
     if (this.product.id) {
-      // Update existing product
       this.productService.updateProduct(this.product).subscribe(
         () => {
-          this.fetchProducts(); // Refresh product list after update
+          this.fetchProducts(); 
         },
         error => {
           console.error('Error updating product', error);
         }
       );
     } else {
-      // Add new product
       this.productService.addProduct(this.product).subscribe(
         () => {
-          this.fetchProducts(); // Refresh product list after adding
+          this.fetchProducts(); 
         },
         error => {
           console.error('Error adding product', error);
         }
       );
     }
-    this.resetForm(); // Reset the form after submission
+    this.resetForm(); 
   }
   
-  // Populate the form with the product data to be edited
+  
   editProduct(item: Product) {
-    this.product = { ...item }; // Set the selected product for editing
+    this.product = { ...item };
   }
 
-  // Delete product
   deleteProduct(item: Product) {
     this.productService.deleteProduct(item.id).subscribe({
       next: () => {
-        this.fetchProducts(); // Refresh product list after deletion
+        this.fetchProducts(); 
       },
       error: (error) => {
         console.error('Error deleting product', error);
@@ -83,7 +78,6 @@ export class MyProductsComponent {
     });
   }
 
-  // Reset form fields
   resetForm() {
     this.product = { id: 0, title: '', description: '', img: '', price: 0, quantity: 0 }; // Reset form
   }

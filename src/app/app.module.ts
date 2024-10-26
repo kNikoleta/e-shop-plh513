@@ -7,7 +7,7 @@ import { AppRoutesModule } from './app.routes';
 @NgModule({
   imports: [
     BrowserModule,
-    AppRoutesModule // Include your routing module
+    AppRoutesModule 
   ],
   providers: [provideHttpClient()]
 })

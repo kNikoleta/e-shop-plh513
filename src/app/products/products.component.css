@@ -1,25 +1,25 @@
-/* app.component.css or any other component CSS file */
+
 .container {
   background-image: url('/assets/products_back.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; /* Prevent the background from repeating */
+  background-repeat: no-repeat; 
   height: 100vh;
-  background-color: #313131; /* Fallback color */
-  position: relative; /* Needed to position child elements */
-  overflow: hidden; /* Prevent overflow on the container */
-  background-attachment: fixed; /* added for fixed background */
+  background-color: #313131;
+  position: relative;
+  overflow: hidden; 
+  background-attachment: fixed;
 }
 
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  max-height: calc(100vh - 250px); /* Adjust height if you have a title or search bar */
-  overflow-y: auto; /* Enable vertical scrolling for the product list */
-  padding: 20px; /* Padding to avoid items touching the edges */
-  position: relative; /* Needed for child positioning */
-  z-index: 1; /* Ensure the product list appears above the background */
+  max-height: calc(100vh - 250px); 
+  overflow-y: auto; 
+  padding: 20px; 
+  position: relative; 
+  z-index: 1; 
 }
 
 .product-card {
@@ -51,14 +51,14 @@
 .title {
   display: grid;
   color: #f7e6dc;
-  place-items: center; /* Centers both horizontally and vertically */
-  text-align: center; /* Center text inside the container */
+  place-items: center; 
+  text-align: center; 
 }
 
 .search-bar {
   display: grid;
-  place-items: center; /* Centers both horizontally and vertically */
-  text-align: center; /* Center text inside the container */
+  place-items: center;
+  text-align: center; 
   margin-bottom: 10px;
 }
 

@@ -2,7 +2,6 @@
   <div class="my-products">
     <h2>My Products</h2>
   
-    <!-- Product Form -->
     <form (ngSubmit)="onSubmit()" #productsForm="ngForm">
       <div>
         <label for="title">Product Title:</label>
@@ -40,7 +39,7 @@
       </div>
     </div>
   
-    <!-- Message when there are no products -->
+
     <ng-template #noProducts>
       <p>No available products.</p>
     </ng-template>

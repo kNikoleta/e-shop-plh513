@@ -13,30 +13,28 @@
 
 .my-products {
   width: 100%;
-  max-width: 800px; /* Constrains the container width */
-  margin: auto; /* Centers the container horizontally */
+  max-width: 800px; 
+  margin: auto; 
   padding: 20px;
   border-radius: 5px;
   background: #f9f9f985;
-  box-sizing: border-box; /* Ensures padding is included in width calculations */
-  min-height: 100vh; /* Ensures the container covers the entire viewport */
+  box-sizing: border-box; 
+  min-height: 100vh; 
   
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers child elements horizontally */
-  justify-content: flex-start; /* Aligns child elements at the top */
+  align-items: center; 
+  justify-content: flex-start; 
 }
 
-/* New styles for the scrollable product list */
 .product-list {
   width: 100%;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers product cards horizontally */
-  
-  max-height: 60vh; /* Set a fixed height for the product list */
-  overflow-y: auto; /* Enable vertical scrolling */
+  align-items: center;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
 .product-card {
@@ -48,7 +46,7 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  max-width: 600px; /* Constrains the product card width */
+  max-width: 600px;
 }
 
 .product-card img {

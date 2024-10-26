@@ -7,17 +7,16 @@
   background-image: url('/assets/my_orders_back.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; /* Ensures background does not repeat */
-  background-color: #c7c5c5d2; /* Fallback color */
-  background-attachment: fixed; /* Keeps background fixed */
+  background-repeat: no-repeat; 
+  background-color: #c7c5c5d2; 
+  background-attachment: fixed; 
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the content horizontally */
-  overflow: hidden; /* Prevents scrolling of the entire container */
-  position: relative; /* Needed to position child elements */
-  overflow-y: auto; /* Allows vertical scrolling of cart items */
-  max-height: calc(100vh - 40px); /* Adjusts height minus margin/padding */
-  background-attachment: fixed; /* added for fixed background */
+  align-items: center; 
+  overflow: hidden; 
+  position: relative; 
+  overflow-y: auto; 
+  max-height: calc(100vh - 40px); 
 }
 
 h2 {
@@ -28,16 +27,16 @@ h2 {
   color: #dfc039;
   border-radius: 10px;
   background-color: #1312128c;
-  padding-right: 30px; /* Optional: Adds space on the right side */
+  padding-right: 30px; 
   
 }
 
 .order-card-wrapper {
   width: 100%;
   max-width: 800px;
-  overflow-y: auto; /* Allows scrolling of order cards */
-  flex: 1; /* Ensures the content can grow */
-  padding-right: 10px; /* Optional: Adds space on the right side */
+  overflow-y: auto; 
+  flex: 1; 
+  padding-right: 10px; 
   
 }
 

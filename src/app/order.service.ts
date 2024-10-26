@@ -15,7 +15,7 @@ interface Order {
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:3004/orders'; // Update with your backend URL
+  private apiUrl = 'http://localhost:3004/orders'; 
 
   constructor(private http: HttpClient) {}
 

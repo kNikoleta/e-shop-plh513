@@ -18,14 +18,12 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // Set the active link based on the current route
     this.activeLink = this.router.url;
 
-    // Subscribe to router events to keep active link updated
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
-        this.activeLink = this.router.url; // Update active link on navigation
+        this.activeLink = this.router.url; 
       });
   }
 

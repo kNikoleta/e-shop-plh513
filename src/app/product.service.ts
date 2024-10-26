@@ -14,10 +14,10 @@ interface Product {
 }
 
 @Injectable({                                   
-  providedIn: 'root', // This makes the service available throughout the app
+  providedIn: 'root', 
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3001/products'; // Update this URL to match your backend API
+  private apiUrl = 'http://localhost:3001/products'; 
 
   constructor(private http: HttpClient) {}
 
@@ -26,27 +26,24 @@ export class ProductService {
   }
 
   getProductById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`); // GET product by ID
+    return this.http.get<any>(`${this.apiUrl}/${id}`); 
   }
 
   getProductByTitle(title: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${title}`); // GET product by title
+    return this.http.get<any>(`${this.apiUrl}/${title}`); 
   }
 
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.apiUrl, product);
   }
 
-  // Update an existing product
   updateProduct(product: Product): Observable<Product> {
     return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
   }
 
-  // Delete a product
+
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
- 
-  
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderService } from '../order.service'; // Import the OrderService
-import { Router } from '@angular/router'; // Import Router for navigation
+import { OrderService } from '../order.service'; 
 
 interface Order {
   id: number;
@@ -19,22 +18,18 @@ interface Order {
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  orders: Order[] = []; // Initialize an empty orders array
-  constructor(private orderService: OrderService) {} // Inject the OrderService
+  orders: Order[] = []; 
+  constructor(private orderService: OrderService) {} 
 
   ngOnInit() {
-    this.fetchOrders(); // Fetch orders on component initialization
+    this.fetchOrders();
   }
 
   fetchOrders() {
     this.orderService.getOrders().subscribe({
       next: (fetched_orders: Order[]) => {
         this.orders = fetched_orders;
-        console.log('Fetched orders:', fetched_orders); // Log orders to inspect data
-       // this.orders = orders.map((order) => ({
-       //   ...order,
-        //  date: order.date || new Date().toISOString().slice(0, 10) // Use order date if available
-        //}));
+        console.log('Fetched orders:', fetched_orders); 
       },
       error: (error) => {
         console.error('Error fetching orders', error);
